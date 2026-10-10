@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tetris - Complete Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1>TETRIS</h1>
+        <span class="stage-tag">Complete Edition</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-sound" class="btn-icon" title="사운드 On/Off">
+          <span id="sound-icon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- Left Column: HOLD & System Controls -->
+      <aside class="side-panel left-panel">
+        <div class="preview-box">
+          <span class="panel-label">HOLD</span>
+          <canvas id="hold-canvas" width="100" height="100"></canvas>
+          <span class="key-hint">C / Shift</span>
+        </div>
+
+        <div class="stat-box highlight-box">
+          <span class="stat-label">TOP SCORE</span>
+          <span id="highscore-val" class="stat-value highscore-highlight">0</span>
+        </div>
+
+        <div class="stat-box">
+          <span class="stat-label">STATUS</span>
+          <span id="status-val" class="stat-value status-active">PLAYING</span>
+        </div>
+
+        <div class="controls-guide desktop-only">
+          <h3>🎮 키보드 조작</h3>
+          <ul>
+            <li><kbd>←</kbd> <kbd>→</kbd> : 좌/우 이동</li>
+            <li><kbd>↓</kbd> : 소프트 드롭 (+1)</li>
+            <li><kbd>Space</kbd> : 하드 드롭 (+2)</li>
+            <li><kbd>↑</kbd> / <kbd>X</kbd> : 시계 회전</li>
+            <li><kbd>Z</kbd> : 반시계 회전</li>
+            <li><kbd>C</kbd> / <kbd>Shift</kbd> : 홀드(보관)</li>
+          </ul>
+        </div>
+
+        <div class="action-buttons desktop-only">
+          <button id="btn-pause" class="btn-secondary">일시정지 (P)</button>
+          <button id="btn-reset" class="btn-secondary">새 게임 (R)</button>
+        </div>
+      </aside>
+
+      <!-- Center Column: Game Board -->
+      <main class="board-column">
+        <div id="board-container" class="board-wrapper">
+          <canvas id="tetris-canvas" width="300" height="600"></canvas>
+          <div id="game-overlay" class="overlay hidden">
+            <div class="overlay-content">
+              <h2 id="overlay-title">GAME OVER</h2>
+              <p id="overlay-msg">스페이스바 또는 재시작 버튼을 누르세요</p>
+              <button id="btn-restart" class="btn-primary">다시 시작</button>
+            </div>
+          </div>
+          <!-- Combo / Clear Toast Notification -->
+          <div id="clear-toast" class="clear-toast hidden"></div>
+        </div>
+      </main>
+
+      <!-- Right Column: NEXT & Stats -->
+      <aside class="side-panel right-panel">
+        <div class="preview-box next-box">
+          <span class="panel-label">NEXT</span>
+          <canvas id="next-canvas" width="100" height="260"></canvas>
+        </div>
+
+        <div class="stat-box">
+          <span class="stat-label">LEVEL</span>
+          <span id="level-val" class="stat-value level-highlight">1</span>
+        </div>
+
+        <div class="stat-box">
+          <span class="stat-label">SCORE</span>
+          <span id="score-val" class="stat-value">0</span>
+        </div>
+
+        <div class="stat-box">
+          <span class="stat-label">LINES</span>
+          <span id="lines-val" class="stat-value">0</span>
+        </div>
+
+        <div id="combo-box" class="stat-box combo-box hidden">
+          <span class="stat-label">COMBO</span>
+          <span id="combo-val" class="stat-value combo-highlight">0</span>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Mobile Touch Controller (Touchscreens / Small Screens) -->
+    <div id="touch-controls" class="touch-controls">
+      <div class="d-pad">
+        <button id="touch-left" class="touch-btn" aria-label="Left">◀</button>
+        <button id="touch-right" class="touch-btn" aria-label="Right">▶</button>
+        <button id="touch-down" class="touch-btn" aria-label="Soft Drop">▼</button>
+      </div>
+      <div class="action-pad">
+        <button id="touch-drop" class="touch-btn touch-btn-primary" aria-label="Hard Drop">⚡ DROP</button>
+        <button id="touch-rotate-ccw" class="touch-btn touch-btn-round" aria-label="Rotate CCW">↺</button>
+        <button id="touch-rotate-cw" class="touch-btn touch-btn-round touch-btn-accent" aria-label="Rotate CW">↻</button>
+        <button id="touch-hold" class="touch-btn touch-btn-wide" aria-label="Hold">HOLD</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="tetris.js"></script>
+</body>
+</html>
